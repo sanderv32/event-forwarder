@@ -9,7 +9,8 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  "Build and Publish":
+  BuildAndPublish:
+    name: Build and publish
     runs-on: ubuntu-latest
 
     permissions:
