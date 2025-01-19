@@ -9,7 +9,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  docker:
+  "Build and Publish":
     runs-on: ubuntu-latest
 
     permissions:
@@ -44,6 +44,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Build and push
+        id: push
         uses: docker/build-push-action@v4
         with:
           context: .
