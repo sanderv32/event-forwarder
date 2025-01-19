@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: logging-syslog
+spec:
+  selector:
+    matchLabels:
+      name: logging-syslog
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        name: logging-syslog
+    spec:
+      containers:
+      - name: rsyslog
+        image: "ttl.sh/rsyslog-amd64:1h"
+        imagePullPolicy: Always
+        env:
+        - name: RSYSLOG_TARGET
+          value: "192.168.0.137"
+        - name: RSYSLOG_PORT
+          value: "514"
+        - name: RSYSLOG_PROTOCOL
+          value: udp
+        volumeMounts:
+        - name: host-container-logs-k8s
+          mountPath: /var/log/containers
+        - name: host-pod-logs
+          mountPath: /var/log/pods
+        - name: rsyslog-state-dir
+          mountPath: /var/lib/rsyslog
+        - name: host-timezone
+          mountPath: /etc/localtime
+      volumes:
+      - name: host-container-logs-k8s
+        hostPath:
+          path: /var/log/containers
+      - name: host-pod-logs
+        hostPath:
+          path: /var/log/pods
+      - name: rsyslog-state-dir
+        hostPath:
+          path: /var/lib/rsyslog
+      - name: host-timezone
+        hostPath:
+          path: /etc/localtime
