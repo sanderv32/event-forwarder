@@ -1,4 +1,5 @@
 FROM alpine:latest
+LABEL "org.opencontainers.image.description"="Push Kubernetes events to remote syslog server"
 
 # Run as root because otherwise we need to do a lot of chowning on the nodes
 RUN apk add --no-cache rsyslog envsubst
