@@ -1,6 +1,6 @@
 global(workDirectory="/var/lib/rsyslog")
 
-module(load="imuxsock" socket="/dev/log" create="off")
+module(load="imuxsock" SysSock.Use="on")
 module(load="imfile" PollingInterval="10")
 input(type="imfile"
       file="/var/log/containers/*.log"
