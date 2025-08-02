@@ -3,7 +3,7 @@ global(workDirectory="/var/lib/rsyslog")
 module(load="imuxsock")
 input(
     type="imuxsock"
-    socket="/dev/log"
+    socket="/dev/host-log"
 )
 
 module(load="imfile" PollingInterval="10")
