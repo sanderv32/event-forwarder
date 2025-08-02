@@ -1,5 +1,6 @@
 global(workDirectory="/var/lib/rsyslog")
 
+module(load="imjournal")
 module(load="imfile" PollingInterval="10")
 input(type="imfile"
       file="/var/log/containers/*.log"
