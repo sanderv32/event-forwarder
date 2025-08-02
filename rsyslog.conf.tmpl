@@ -4,7 +4,6 @@ module(load="imuxsock")
 input(
     type="imuxsock"
     socket="/dev/log"
-    create="off"
 )
 
 module(load="imfile" PollingInterval="10")
