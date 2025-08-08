@@ -8,11 +8,17 @@ input(type="imfile"
 template(name="ContainerLogs" type="list") {
     property(name="timestamp" dateFormat="rfc3339")
     constant(value=" ")
+
     property(name="$!metadata!filename" regex.type="ERE"
              regex.nomatchmode="FIELD"
              regex.expression="([a-zA-Z0-9_-]*)-"
              regex.submatch="1")
     constant(value=" ")
+
+    constant(value="-")
+    constant(value="${NODE_NAME}")
+    constant(value=": ")
+
     property(name="msg" spifno1stsp="on")
     property(name="msg" droplastlf="on")
     constant(value="\n")
